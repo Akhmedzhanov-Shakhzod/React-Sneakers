@@ -1,3 +1,8 @@
+
+### React Sneakers [YouTube](https://www.youtube.com/playlist?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7)
+
+### [Template in Figma](https://www.figma.com/file/w4Brw2FTIgyX4wxrYa7APX/React-Sneakers-(Copy)?node-id=60%3A2)
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
