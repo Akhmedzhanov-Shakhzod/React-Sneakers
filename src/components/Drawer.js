@@ -9,23 +9,16 @@ function Drawer(props) {
                 </h2>
 
                 <div className="cartItems">
-                    <div className="cartItem d-flex align-center mb-20">
-                        <div style={{backgroundImage: 'url(img/sneakers/1.jpg)'}} className="cartImg"></div>
-                        <div className="mr-20 flex">
-                            <p className="mb-5">Мужские Кроссовки Nike Blazer Mid Suede</p>
-                            <b>1205 руб.</b>
+                    {props.items.map(obj => (
+                        <div className="cartItem d-flex align-center mb-20">
+                            <div style={{backgroundImage: `url(${obj.imageUrl})`}} className="cartImg"></div>
+                            <div className="mr-20 flex">
+                                <p className="mb-5">{obj.name}</p>
+                                <b>{obj.price} руб.</b>
+                            </div>
+                            <img className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
                         </div>
-                        <img className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
-                    </div>
-
-                    <div className="cartItem d-flex align-center mb-20">
-                        <div style={{backgroundImage: 'url(img/sneakers/2.jpg)'}} className="cartImg"></div>
-                        <div className="mr-20 flex">
-                            <p className="mb-5">Мужские Кроссовки Nike Blazer Mid Suede</p>
-                            <b>1205 руб.</b>
-                        </div>
-                        <img className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
-                    </div>
+                    ))}
                 </div>
 
                 <div className="cartTotalBlock">

@@ -7,6 +7,7 @@ import React from 'react';
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [items,setItems] = React.useState([]);
+  const [cartItems,setCartItems] = React.useState([]);
 
   React.useEffect(() => {
     fetch('https://627b904fa01c46a853209bf5.mockapi.io/Items')
@@ -18,10 +19,14 @@ function App() {
     });
   },[]);
 
+  const onAddToCart = (obj) =>{
+    setCartItems(prev => [... prev,obj]);
+  };
+
   return (
     <div className="wrapper clear">
 
-      {cartOpened && <Drawer onClose = {() => setCartOpened(false)}/>}
+      {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)}/>}
       <Header
       onClickCart = {() => setCartOpened(true)}
       />
@@ -36,12 +41,13 @@ function App() {
         </div>
 
         <div className='d-flex flex-wrap'>
-          {items.map((obj) => 
+          {items.map((item) => 
             <Card 
-            title = {obj.name}
-            price = {obj.price}
-            imageUrl={obj.imageUrl}
-            onClickFavotive = {() => alert('Favorite')}
+            title = {item.name}
+            price = {item.price}
+            imageUrl={item.imageUrl}
+            onFavotive = {() => alert('Favorite')}
+            onPlus = {obj => onAddToCart(obj)}
             />
             )}
         </div>
