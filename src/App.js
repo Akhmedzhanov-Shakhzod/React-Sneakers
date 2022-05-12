@@ -13,11 +13,16 @@ function App() {
 
   React.useEffect(() => {
     axios.get('https://627b904fa01c46a853209bf5.mockapi.io/Items')
-    .then(response => {setItems(response.data)})
+    .then(response => {setItems(response.data)});
   },[]);
 
+  React.useEffect(() => {
+    axios.get('https://627b904fa01c46a853209bf5.mockapi.io/Cart')
+    .then(response => {setCartItems(response.data)});
+  },[cartOpened]);
+ 
   const onAddToCart = (obj) =>{
-    setCartItems(prev => [... prev,obj]);
+    axios.post('https://627b904fa01c46a853209bf5.mockapi.io/Cart',obj);
   };
 
   const onChangeSearchInput = (event) => {
