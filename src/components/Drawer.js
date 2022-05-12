@@ -8,6 +8,16 @@ function Drawer(props) {
                     <img onClick={props.onClose} className="removeBtn cu-p" src="img/btn-remove.svg" alt="Close" />
                 </h2>
 
+                <div className="cartEmpty d-flex align-center justify-center flex-column flex">
+                    <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
+                    <h2>Корзина пустая</h2>
+                    <p className="opacity-6">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
+                    <button onClick={props.onClose} className="greenButton">
+                    <img src="/img/arrow.svg" alt="Arrow" />
+                        Вернуться назад
+                    </button>
+                </div>
+
                 <div className="cartItems">
                     {props.items.map(obj => (
                         <div className="cartItem d-flex align-center mb-20" key = {obj.imageUrl}>
@@ -16,7 +26,7 @@ function Drawer(props) {
                                 <p className="mb-5">{obj.name}</p>
                                 <b>{obj.price} руб.</b>
                             </div>
-                            <img className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
+                            <img onClick={() => props.onRemoveItem(obj.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
                         </div>
                     ))}
                 </div>
