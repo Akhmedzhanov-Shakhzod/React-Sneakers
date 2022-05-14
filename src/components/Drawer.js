@@ -1,25 +1,28 @@
+import React from "react";
+import AppContext from "../context";
 
-function Drawer(props) {
+function Drawer({onClose,onRemoveItem}) {
+    const {cartItems} = React.useContext(AppContext);
     return (
         <div className="overlay">
             <div className="drawer">
                 <h2 className="d-flex justify-between mb-30">
                     Корзина
-                    <img onClick={props.onClose} className="removeBtn cu-p" src="img/btn-remove.svg" alt="Close" />
+                    <img onClick={onClose} className="removeBtn cu-p" src="img/btn-remove.svg" alt="Close" />
                 </h2>
 
                 {
-                    props.items.length > 0 ? (
+                    cartItems.length > 0 ? (
                     <div>
                         <div className="cartItems">
-                        {props.items.map(obj => (
+                        {cartItems.map(obj => (
                             <div className="cartItem d-flex align-center mb-20" key = {obj.id}>
                                 <div style={{backgroundImage: `url(${obj.imageUrl})`}} className="cartImg"></div>
                                 <div className="mr-20 flex">
                                     <p className="mb-5">{obj.name}</p>
                                     <b>{obj.price} руб.</b>
                                 </div>
-                                <img onClick={() => props.onRemoveItem(obj.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
+                                <img onClick={() => onRemoveItem(obj.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
                             </div>
                         ))}
                         </div>
@@ -46,7 +49,7 @@ function Drawer(props) {
                         <img className="mb-20" width="120px" height="120px" src="/img/empty-cart.jpg" alt="Empty" />
                         <h2>Корзина пустая</h2>
                         <p className="opacity-6">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-                        <button onClick={props.onClose} className="greenButton">
+                        <button onClick={onClose} className="greenButton">
                         <img src="/img/arrow.svg" alt="Arrow" />
                             Вернуться назад
                         </button>

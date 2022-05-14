@@ -1,8 +1,11 @@
 
+import React from 'react';
 import Card from '../components/Card';
+import AppContext from '../context';
 
 
-function Home({isLoading,cartItems,favoriteItems,items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart}){
+function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart}){
+    const {items,cartItems,favoriteItems} = React.useContext(AppContext);
     return (
         <div className="content p-40">
             <div className="d-flex align-center mb-40 justify-between">
@@ -17,7 +20,7 @@ function Home({isLoading,cartItems,favoriteItems,items, searchValue, setSearchVa
 
             <div className='d-flex flex-wrap'>
             {
-                isLoading ? [...Array(12)]
+                isLoading ? [...Array(8)]
                 .map((item,index) =>
                     <Card
                     key = {index}
