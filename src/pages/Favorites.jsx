@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../components/Card';
 import AppContext from '../context';
 
-function Favorites({onRemoveFavorite}){
+function Favorites(){
     const {favoriteItems} = React.useContext(AppContext);
     return (
         <div className="content p-40">
@@ -20,7 +20,6 @@ function Favorites({onRemoveFavorite}){
                 price = {item.price}
                 imageUrl={item.imageUrl}
                 favorited = {true}
-                onFavorite = {onRemoveFavorite}
                 />
                 )}
             </div>

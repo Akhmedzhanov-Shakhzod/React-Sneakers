@@ -2,20 +2,19 @@
 import styles from './Card.module.scss'
 import React from 'react'
 import ContentLoader from "react-content-loader"
+import AppContext from '../../context';
 
-function Card({id,title,imageUrl,price,onFavorite,onPlus,favorited = false,added = false,loading = false}){
-    const [isAdded,setIsAdded] = React.useState(added);
+function Card({id,title,imageUrl,price,onPlus,favorited = false,loading = false}){
     const [isFavorite,setIsFavorite] = React.useState(favorited);
+    const {isItemAdded,onAddToFavorite} = React.useContext(AppContext);
 
     const onClickPlus = () => {
         onPlus({id,title,price,imageUrl});
-        setIsAdded(!isAdded);
     };
     const onClickFavorite = () => {
-        onFavorite({id,title,price,imageUrl});
+        onAddToFavorite({id,title,price,imageUrl});
         setIsFavorite(!isFavorite);
     };
-    
     return (
         <div className={styles.card}>
             {
@@ -48,7 +47,7 @@ function Card({id,title,imageUrl,price,onFavorite,onPlus,favorited = false,added
                             <span>Цена: </span>
                             <b>{price}</b>
                         </div>
-                        <img className={styles.plus} onClick={onClickPlus} src={isAdded ? "img/btn-checked.svg" : "img/btn-plus.svg"} alt="Plus" />
+                        <img className={styles.plus} onClick={onClickPlus} src={isItemAdded(id) ? "img/btn-checked.svg" : "img/btn-plus.svg"} alt="Plus" />
                     </div>
                 </>
             }

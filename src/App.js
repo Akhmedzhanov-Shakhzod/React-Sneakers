@@ -28,7 +28,7 @@ function App() {
       setFavoriteItems(favoriteResponse.data)
       setCartItems(cartResponse.data)
       setItems(itemsResponse.data);
-      
+
       setIsloading(false);
     }
 
@@ -74,12 +74,15 @@ function App() {
     setSearchValue(event.target.value);
   };
 
+  const isItemAdded = (id) =>{
+    return cartItems.some(obj => Number(obj.id) === Number(id));
+  }
+
   return (
-    <AppContext.Provider value={{items,cartItems,favoriteItems}}>
+    <AppContext.Provider value={{items,cartItems,favoriteItems,isItemAdded,onAddToFavorite,setCartOpened,setCartItems}}>
       <div className="wrapper clear">
         {cartOpened 
         && <Drawer
-        onClose = {() => setCartOpened(false)}
         onRemoveItem = {onRemoveFromCart}
         />}
         <Header
@@ -91,15 +94,12 @@ function App() {
             searchValue = {searchValue}
             setSearchValue = {setSearchValue}
             onChangeSearchInput = {onChangeSearchInput}
-            onFavorite = {onAddToFavorite}
             onAddToCart = {onAddToCart}
             isLoading = {isLoading}
             />
           }/>
           <Route path='/favorites' exact element = {
-            <Favorites
-            onRemoveFavorite = {onAddToFavorite}
-            />
+            <Favorites/>
           }/>
         </Routes>
       </div>
