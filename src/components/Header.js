@@ -19,12 +19,14 @@ function Header(props){
                     <span>1205 руб.</span>
                 </li>
                 <li onClick={props.onClickFavorite} className="mr-20 cu-p">
-                    <Link to ="/favorites">
+                    <Link to = "/favorites">
                         <img width={18} height={18} src="img/heart.png" alt="Favorites"/>
                     </Link>
                 </li>
                 <li>
-                    <img width={18} height={18} src="img/user.png" alt="User"/>
+                    <Link to = "/orders">
+                        <img width={18} height={18} src="img/user.png" alt="User"/>
+                    </Link>
                 </li>
             </ul>  
         </header>  

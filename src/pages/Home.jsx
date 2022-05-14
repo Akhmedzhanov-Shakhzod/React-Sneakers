@@ -2,7 +2,7 @@
 import Card from '../components/Card';
 
 
-function Home({items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart}){
+function Home({isLoading,cartItems,favoriteItems,items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart}){
     return (
         <div className="content p-40">
             <div className="d-flex align-center mb-40 justify-between">
@@ -16,19 +16,30 @@ function Home({items, searchValue, setSearchValue, onChangeSearchInput, onFavori
             </div>
 
             <div className='d-flex flex-wrap'>
-            {items
-            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((item) => 
-                <Card 
-                key = {item.id}
-                id = {item.id}
-                title = {item.title}
-                price = {item.price}
-                imageUrl={item.imageUrl}
-                onFavorite = {obj => onFavorite(obj)}
-                onPlus = {obj => onAddToCart(obj)}
-                />
-                )}
+            {
+                isLoading ? [...Array(12)]
+                .map((item,index) =>
+                    <Card
+                    key = {index}
+                    loading
+                    />
+                )
+                :items
+                .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+                .map((item) => 
+                    <Card 
+                    key = {item.id}
+                    id = {item.id}
+                    title = {item.title}
+                    price = {item.price}
+                    imageUrl={item.imageUrl}
+                    onFavorite = {obj => onFavorite(obj)}
+                    onPlus = {obj => onAddToCart(obj)}
+                    added = {cartItems.some(obj => obj.id === item.id)}
+                    favorited = {favoriteItems.some(obj => obj.id === item.id)}
+                    />
+                ) 
+            }
             </div>
         </div>
     );
