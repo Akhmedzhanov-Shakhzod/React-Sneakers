@@ -1,11 +1,14 @@
 import React from "react";
-import AppContext from "../context";
-import Info from "./Info";
 import axios from "axios";
-import { UseCart } from "../hooks/useCart";
+import AppContext from "../../context";
+
+import Info from "../Info";
+import { UseCart } from "../../hooks/useCart";
+
+import styles from './Drawer.module.scss';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-function Drawer({onRemoveItem}) {
+function Drawer({onRemoveItem,opened}) {
     const {cartItems,setCartItems,setCartOpened} = React.useContext(AppContext);
     const [isOrderComplete,setIsOrderComplete] = React.useState(false);
     const [orderId,setOrderId] = React.useState(false);
@@ -32,31 +35,30 @@ function Drawer({onRemoveItem}) {
         }
         setIsLoading(false);
       };
-
     return (
-        <div className="overlay">
-            <div className="drawer">
+        <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+            <div className={styles.drawer}>
                 <h2 className="d-flex justify-between mb-30">
                     Корзина
-                    <img onClick={() => setCartOpened(false)} className="removeBtn cu-p" src="img/btn-remove.svg" alt="Close" />
+                    <img onClick={() => setCartOpened(false)} className={`${styles.removeBtn} cu-p`} src="img/btn-remove.svg" alt="Close" />
                 </h2>
 
                 {
                     cartItems.length > 0 ? 
                     <div className="d-flex flex flex-column">
-                        <div className="cartItems">
+                        <div className={styles.cartItems}>
                         {cartItems.map(obj => (
-                            <div className="cartItem d-flex align-center mb-20" key = {obj.id}>
-                                <div style={{backgroundImage: `url(${obj.imageUrl})`}} className="cartImg"></div>
+                            <div className={`${styles.cartItem} d-flex align-center mb-20`} key = {obj.id}>
+                                <div style={{backgroundImage: `url(${obj.imageUrl})`}} className={styles.cartImg}></div>
                                 <div className="mr-20 flex">
                                     <p className="mb-5">{obj.name}</p>
                                     <b>{obj.price} руб.</b>
                                 </div>
-                                <img onClick={() => onRemoveItem(obj.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
+                                <img onClick={() => onRemoveItem(obj.id)} className={styles.removeBtn} src="img/btn-remove.svg" alt="Remove" />
                             </div>
                         ))}
                         </div>
-                        <div className="cartTotalBlock">
+                        <div className={styles.cartTotalBlock}>
                         <ul>
                             <li>
                                 <span>Итого:</span>

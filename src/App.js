@@ -82,10 +82,10 @@ function App() {
   return (
     <AppContext.Provider value={{items,cartItems,isItemAdded,onAddToFavorite,onAddToCart,favoriteItems,setCartOpened,setCartItems}}>
       <div className="wrapper clear">
-        {cartOpened 
-        && <Drawer
+        <Drawer
         onRemoveItem = {onRemoveFromCart}
-        />}
+        opened = {cartOpened}
+        />
         <Header
         onClickCart = {() => setCartOpened(true)}
         />
