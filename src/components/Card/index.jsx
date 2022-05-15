@@ -4,9 +4,9 @@ import React from 'react'
 import ContentLoader from "react-content-loader"
 import AppContext from '../../context';
 
-function Card({id,title,imageUrl,price,onPlus,favorited = false,loading = false}){
+function Card({id,title,imageUrl,price,onPlus,favorited = false,loading = false,onAddToFavorite}){
     const [isFavorite,setIsFavorite] = React.useState(favorited);
-    const {isItemAdded,onAddToFavorite} = React.useContext(AppContext);
+    const {isItemAdded} = React.useContext(AppContext);
 
     const onClickPlus = () => {
         onPlus({id,title,price,imageUrl});
@@ -35,9 +35,12 @@ function Card({id,title,imageUrl,price,onPlus,favorited = false,loading = false}
                 </ContentLoader> 
                 :
                 <>
-                    <div onClick={onClickFavorite} className={styles.favorite}>
-                        <img src={isFavorite ? "img/heart-liked.svg" : "img/heart-unliked.svg"} alt="liked"/>
-                    </div>
+                    {
+                        onAddToFavorite &&
+                        <div onClick={onClickFavorite} className={styles.favorite}>
+                            <img src={isFavorite ? "img/heart-liked.svg" : "img/heart-unliked.svg"} alt="liked"/>
+                        </div>
+                    }
                     <img width={133} height={122} src={imageUrl} alt="Sneakers" />
 
                     <h5>{title}</h5>
@@ -47,7 +50,10 @@ function Card({id,title,imageUrl,price,onPlus,favorited = false,loading = false}
                             <span>Цена: </span>
                             <b>{price}</b>
                         </div>
-                        <img className={styles.plus} onClick={onClickPlus} src={isItemAdded(id) ? "img/btn-checked.svg" : "img/btn-plus.svg"} alt="Plus" />
+                        {
+                            onPlus &&
+                            <img className={styles.plus} onClick={onClickPlus} src={isItemAdded(id) ? "img/btn-checked.svg" : "img/btn-plus.svg"} alt="Plus" />
+                        }
                     </div>
                 </>
             }

@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import AppContext from '../context';
 
 function Favorites(){
-    const {favoriteItems} = React.useContext(AppContext);
+    const {favoriteItems,onAddToCart,onAddToFavorite} = React.useContext(AppContext);
     return (
         <div className="content p-40">
             <div className="d-flex align-center mb-40 justify-between">
@@ -20,6 +20,8 @@ function Favorites(){
                 price = {item.price}
                 imageUrl={item.imageUrl}
                 favorited = {true}
+                onPlus = {onAddToCart}
+                onAddToFavorite = {onAddToFavorite}
                 />
                 )}
             </div>

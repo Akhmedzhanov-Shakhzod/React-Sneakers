@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import {Route, Routes} from 'react-router-dom';
 import AppContext from './context';
+import Orders from './pages/Orders';
 
 
 function App() {
@@ -79,7 +80,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{items,cartItems,favoriteItems,isItemAdded,onAddToFavorite,setCartOpened,setCartItems}}>
+    <AppContext.Provider value={{items,cartItems,isItemAdded,onAddToFavorite,onAddToCart,favoriteItems,setCartOpened,setCartItems}}>
       <div className="wrapper clear">
         {cartOpened 
         && <Drawer
@@ -94,13 +95,15 @@ function App() {
             searchValue = {searchValue}
             setSearchValue = {setSearchValue}
             onChangeSearchInput = {onChangeSearchInput}
-            onAddToCart = {onAddToCart}
             isLoading = {isLoading}
             />
           }/>
           <Route path='/favorites' exact element = {
             <Favorites/>
           }/>
+          <Route path='/orders' exact element = {
+            <Orders/>}
+          />
         </Routes>
       </div>
     </AppContext.Provider>

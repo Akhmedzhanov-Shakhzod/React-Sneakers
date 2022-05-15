@@ -4,8 +4,9 @@ import Card from '../components/Card';
 import AppContext from '../context';
 
 
-function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput, onAddToCart}){
-    const {items,favoriteItems} = React.useContext(AppContext);
+function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput}){
+    const {favoriteItems,items,onAddToCart,onAddToFavorite} = React.useContext(AppContext);
+
     return (
         <div className="content p-40">
             <div className="d-flex align-center mb-40 justify-between">
@@ -37,6 +38,7 @@ function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput, onAd
                     price = {item.price}
                     imageUrl={item.imageUrl}
                     onPlus = {obj => onAddToCart(obj)}
+                    onAddToFavorite = {onAddToFavorite}
                     favorited = {favoriteItems.some(obj => obj.id === item.id)}
                     />
                 ) 
