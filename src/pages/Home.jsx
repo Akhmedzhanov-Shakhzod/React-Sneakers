@@ -5,7 +5,7 @@ import AppContext from '../context';
 
 
 function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput}){
-    const {favoriteItems,items,onAddToCart,onAddToFavorite} = React.useContext(AppContext);
+    const {items,onAddToCart,onAddToFavorite} = React.useContext(AppContext);
 
     return (
         <div className="content p-40">
@@ -38,8 +38,7 @@ function Home({isLoading, searchValue, setSearchValue, onChangeSearchInput}){
                     price = {item.price}
                     imageUrl={item.imageUrl}
                     onPlus = {obj => onAddToCart(obj)}
-                    onAddToFavorite = {onAddToFavorite}
-                    favorited = {favoriteItems.some(obj => obj.id === item.id)}
+                    onAddToFavorite = {obj => onAddToFavorite(obj)}
                     />
                 ) 
             }

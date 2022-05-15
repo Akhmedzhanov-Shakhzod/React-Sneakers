@@ -45,18 +45,18 @@ function Drawer({onRemoveItem,opened}) {
 
                 {
                     cartItems.length > 0 ? 
-                    <div className="d-flex flex flex-column">
+                    <>
                         <div className={styles.cartItems}>
-                        {cartItems.map(obj => (
-                            <div className={`${styles.cartItem} d-flex align-center mb-20`} key = {obj.id}>
-                                <div style={{backgroundImage: `url(${obj.imageUrl})`}} className={styles.cartImg}></div>
-                                <div className="mr-20 flex">
-                                    <p className="mb-5">{obj.name}</p>
-                                    <b>{obj.price} руб.</b>
+                            {cartItems.map(obj => (
+                                <div className={`${styles.cartItem} d-flex align-center mb-20`} key = {obj.id}>
+                                    <div style={{backgroundImage: `url(${obj.imageUrl})`}} className={styles.cartImg}></div>
+                                    <div className="mr-20 flex">
+                                        <p className="mb-5">{obj.name}</p>
+                                        <b>{obj.price} руб.</b>
+                                    </div>
+                                    <img onClick={() => onRemoveItem(obj.id)} className={styles.removeBtn} src="img/btn-remove.svg" alt="Remove" />
                                 </div>
-                                <img onClick={() => onRemoveItem(obj.id)} className={styles.removeBtn} src="img/btn-remove.svg" alt="Remove" />
-                            </div>
-                        ))}
+                            ))}
                         </div>
                         <div className={styles.cartTotalBlock}>
                         <ul>
@@ -74,7 +74,7 @@ function Drawer({onRemoveItem,opened}) {
                         </ul>
                         <button disabled={isLoading} onClick={onClickOrder} className="greenButton">Оформить заказ <img src="img/arrow.svg" alt="Arrow"/></button>
                         </div> 
-                    </div>
+                    </>
                     :<>
                     {
                         isOrderComplete ?

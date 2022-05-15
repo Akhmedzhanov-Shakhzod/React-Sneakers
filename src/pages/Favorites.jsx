@@ -15,11 +15,10 @@ function Favorites(){
             .map((item) => 
                 <Card 
                 key = {item.id}
-                id = {item.id}
+                id = {item.parentId}
                 title = {item.title}
                 price = {item.price}
                 imageUrl={item.imageUrl}
-                favorited = {true}
                 onPlus = {onAddToCart}
                 onAddToFavorite = {onAddToFavorite}
                 />
